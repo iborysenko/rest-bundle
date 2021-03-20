@@ -1,0 +1,16 @@
+{
+    "name": "iborysenko/rest-bundle",
+    "description": "Rest Bundle",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Iborysenko\\Rest\\": "src/"
+        }
+    }
+}

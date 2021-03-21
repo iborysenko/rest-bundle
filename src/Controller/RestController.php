@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Iborysenko\Rest\Controller;
 
-use Api\Service\ApiResponder;
 use AutoMapperPlus\AutoMapperInterface;
+use Iborysenko\Rest\Service\ApiResponder;
 
 abstract class RestController
 {

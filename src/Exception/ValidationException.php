@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Iborysenko\Rest\Exception;
 
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+
 class ValidationException extends BadRequestHttpException
 {
     private const VALIDATION_ERROR = 'Invalid request parameters';

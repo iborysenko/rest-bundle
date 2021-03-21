@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Iborysenko\Rest\Service;
 
 use Iborysenko\Rest\Dto\Request\PaginationDto;
-use AutoMapperPlus\MapperInterface;
+use AutoMapperPlus\AutoMapperInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class ApiResponder
 {
@@ -19,9 +18,9 @@ class ApiResponder
 
     private PaginatorInterface $paginator;
 
-    private MapperInterface $mapper;
+    private AutoMapperInterface $mapper;
 
-    public function __construct(SerializerInterface $serializer, PaginatorInterface $paginator, MapperInterface $mapper)
+    public function __construct(SerializerInterface $serializer, PaginatorInterface $paginator, AutoMapperInterface $mapper)
     {
         $this->serializer = $serializer;
         $this->paginator = $paginator;

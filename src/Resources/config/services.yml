@@ -6,8 +6,15 @@ services:
 
   Iborysenko\Rest\:
     resource: '../../../src/*'
-    exclude: '../../../src/{DependencyInjection,Dto,RestBundle.php}'
+    exclude: '../../../src/{DependencyInjection,Dto,Exception,RestBundle.php}'
 
   Iborysenko\Rest\ParamConverter\MapperConverter:
     tags:
       - { name: request.param_converter, priority: -2, converter: mapper_converter }
+
+  Knp\Component\Pager\Event\Subscriber\Paginate\PaginationSubscriber: ~
+  Knp\Component\Pager\PaginatorInterface:
+    class: Knp\Component\Pager\Paginator
+    arguments:
+    - '@Symfony\Contracts\EventDispatcher\EventDispatcherInterface'
+

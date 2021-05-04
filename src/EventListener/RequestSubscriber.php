@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Iborysenko\Rest\EventListener;
+namespace FutureFoods\Rest\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;

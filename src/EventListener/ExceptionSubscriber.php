@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Iborysenko\Rest\EventListener;
+namespace FutureFoods\Rest\EventListener;
 
-use Iborysenko\Rest\Exception\ValidationException;
+use FutureFoods\Rest\Exception\ValidationException;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

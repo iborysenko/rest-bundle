@@ -1,5 +1,5 @@
 {
-    "name": "iborysenko/rest-bundle",
+    "name": "futurefoods/rest-bundle",
     "description": "Rest Bundle",
     "license": "MIT",
     "type": "symfony-bundle",
@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Iborysenko\\Rest\\": "src/"
+            "FutureFoods\\Rest\\": "src/"
         }
     }
 }

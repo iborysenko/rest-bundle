@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Iborysenko\Rest\Service;
+namespace FutureFoods\Rest\Service;
 
-use Iborysenko\Rest\Dto\Request\PaginationDto;
+use FutureFoods\Rest\Dto\Request\PaginationDto;
 use AutoMapperPlus\AutoMapperInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;

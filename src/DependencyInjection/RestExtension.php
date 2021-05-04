@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Iborysenko\Rest\DependencyInjection;
+namespace FutureFoods\Rest\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

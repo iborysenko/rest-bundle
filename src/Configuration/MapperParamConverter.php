@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Iborysenko\Rest\Configuration;
+namespace FutureFoods\Rest\Configuration;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 

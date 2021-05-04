@@ -1,8 +1,20 @@
 ### Rest Bundle
 
 ## Install bundle
+
+Add to your package.json
+```json
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@gitlab.futurefoods.solutions:backend/library/rest-bundle.git"
+    }
+  ]
+}
+``` 
 ```shell
-composer require iborysenko/rest-bundle
+composer require futurefoods/rest-bundle
 ```
 
 ## Enable Bundle in config/bundles.php
@@ -10,7 +22,7 @@ composer require iborysenko/rest-bundle
 
 return [
     AutoMapperPlus\AutoMapperPlusBundle\AutoMapperPlusBundle::class => ['all' => true], // uses for automapping
-    Iborysenko\Rest\RestBundle::class => ['all' => true],
+    FutureFoods\Rest\RestBundle::class => ['all' => true],
 ];
 ```
 
@@ -23,9 +35,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Iborysenko\Rest\Configuration\MapperParamConverter;
-use Iborysenko\Rest\Controller\RestController;
-use Iborysenko\Rest\Dto\Request\PaginationDto;
+use FutureFoods\Rest\Configuration\MapperParamConverter;
+use FutureFoods\Rest\Controller\RestController;
+use FutureFoods\Rest\Dto\Request\PaginationDto;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -34,7 +46,7 @@ class IndexController extends RestController
     /**
      * @Route(path="/", methods={"GET"})
      * 
-     * @MapperParamConverter("paginationDto", class="Iborysenko\Rest\Dto\Request\PaginationDto")
+     * @MapperParamConverter("paginationDto", class="FutureFoods\Rest\Dto\Request\PaginationDto")
      *
      * @return Response
      */

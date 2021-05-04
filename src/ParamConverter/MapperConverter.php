@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Iborysenko\Rest\ParamConverter;
+namespace FutureFoods\Rest\ParamConverter;
 
-use Iborysenko\Rest\Configuration\MapperParamConverter;
-use Iborysenko\Rest\Exception\ValidationException;
+use FutureFoods\Rest\Configuration\MapperParamConverter;
+use FutureFoods\Rest\Exception\ValidationException;
 use AutoMapperPlus\AutoMapperInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;

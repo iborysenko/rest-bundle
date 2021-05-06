@@ -22,7 +22,7 @@ composer require futurefoods/rest-bundle
 
 return [
     AutoMapperPlus\AutoMapperPlusBundle\AutoMapperPlusBundle::class => ['all' => true], // uses for automapping
-    FutureFoods\Rest\RestBundle::class => ['all' => true],
+    Ba\Rest\RestBundle::class => ['all' => true],
 ];
 ```
 
@@ -35,9 +35,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use FutureFoods\Rest\Configuration\MapperParamConverter;
-use FutureFoods\Rest\Controller\RestController;
-use FutureFoods\Rest\Dto\Request\PaginationDto;
+use Ba\Rest\Configuration\MapperParamConverter;
+use Ba\Rest\Controller\RestController;
+use Ba\Rest\Dto\Request\PaginationDto;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -46,7 +46,7 @@ class IndexController extends RestController
     /**
      * @Route(path="/", methods={"GET"})
      * 
-     * @MapperParamConverter("paginationDto", class="FutureFoods\Rest\Dto\Request\PaginationDto")
+     * @MapperParamConverter("paginationDto", class="Ba\Rest\Dto\Request\PaginationDto")
      *
      * @return Response
      */

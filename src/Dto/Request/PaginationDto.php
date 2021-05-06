@@ -1,6 +1,6 @@
 <?php
 
-namespace FutureFoods\Rest\Dto\Request;
+namespace Ba\Rest\Dto\Request;
 
 class PaginationDto
 {

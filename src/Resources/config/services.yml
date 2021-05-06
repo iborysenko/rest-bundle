@@ -4,11 +4,11 @@ services:
     autoconfigure: true
     public: true
 
-  FutureFoods\Rest\:
+  Ba\Rest\:
     resource: '../../../src/*'
     exclude: '../../../src/{DependencyInjection,Dto,Exception,RestBundle.php}'
 
-  FutureFoods\Rest\ParamConverter\MapperConverter:
+  Ba\Rest\ParamConverter\MapperConverter:
     tags:
       - { name: request.param_converter, priority: -2, converter: mapper_converter }
 

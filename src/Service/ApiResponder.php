@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FutureFoods\Rest\Service;
+namespace Ba\Rest\Service;
 
-use FutureFoods\Rest\Dto\Request\PaginationDto;
+use Ba\Rest\Dto\Request\PaginationDto;
 use AutoMapperPlus\AutoMapperInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -56,12 +56,10 @@ class ApiResponder
             $items = $this->mapper->mapMultiple($items, $dtoName);
         }
         $data = [
-            'data'  => $items,
-            'meta'  => [
-                'page'  => $paginationResult->getCurrentPageNumber(),
-                'limit' => $paginationResult->getItemNumberPerPage(),
-                'total' => $paginationResult->getTotalItemCount()
-            ],
+            'items' => $items,
+            'page'  => $paginationResult->getCurrentPageNumber(),
+            'limit' => $paginationResult->getItemNumberPerPage(),
+            'total' => $paginationResult->getTotalItemCount()
         ];
 
         return $this->createResponse($data);

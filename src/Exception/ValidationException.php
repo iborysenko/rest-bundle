@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace FutureFoods\Rest\Exception;
+namespace Ba\Rest\Exception;
 
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 

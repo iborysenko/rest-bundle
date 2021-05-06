@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FutureFoods\Rest\Controller;
+namespace Ba\Rest\Controller;
 
 use AutoMapperPlus\AutoMapperInterface;
-use FutureFoods\Rest\Service\ApiResponder;
+use Ba\Rest\Service\ApiResponder;
 
 abstract class RestController
 {

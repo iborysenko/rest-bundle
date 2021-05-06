@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FutureFoods\Rest;
+namespace Ba\Rest;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

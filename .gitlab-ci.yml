@@ -1,0 +1,93 @@
+include:
+  - project: 'devops/gitlab-config'
+    file: 'include/workflow.yml'
+
+variables:
+  REGISTRY_HOST: default-route-openshift-image-registry.apps.okd.futurefoods.solutions
+  PHP_BASE_IMAGE: $REGISTRY_HOST/gitlab/docker-php-base-image:8.0.3
+  PHP_CODE_QUALITY_IMAGE: $REGISTRY_HOST/gitlab/docker-php-code-quality-image:1.0
+  PHPSTAN_LEVEL: 5
+
+stages:
+  - prepare
+  - code quality
+  - publish
+  - pages
+
+cache: &global_cache
+  key:
+    files:
+      - composer.lock
+  paths:
+    - ./bin
+    - ./vendor
+  policy: pull
+
+prepare:
+  cache:
+    <<: *global_cache
+    policy: pull-push
+  stage: prepare
+  image: $PHP_BASE_IMAGE
+  script:
+    - rm -rf vendor && COMPOSER_MEMORY_LIMIT=-1 composer install --working-dir=. --optimize-autoloader --no-interaction --ignore-platform-reqs
+    - mkdir -p ./reports
+
+phpcs:
+  stage: code quality
+  image: $PHP_CODE_QUALITY_IMAGE
+  script:
+    - /composer/vendor/bin/phpcs --standard=PSR12 --ignore=vendor,tests --extensions=php ./src
+  rules:
+    - if: '$QUALITY_DISABLED == "yes"'
+      when: never
+    - if: '$PHPCS_ALLOW_FAILURE == "yes"'
+      allow_failure: true
+    - when: on_success
+
+phpmd:
+  stage: code quality
+  image: $PHP_CODE_QUALITY_IMAGE
+  script:
+    - /composer/vendor/bin/phpmd ./src text /rules/phpmd.ruleset.xml --exclude vendor,tests
+  rules:
+    - if: '$QUALITY_DISABLED == "yes"'
+      when: never
+    - if: '$PHPMD_ALLOW_FAILURE == "yes"'
+      allow_failure: true
+    - when: on_success
+
+phpcpd:
+  stage: code quality
+  image: $PHP_CODE_QUALITY_IMAGE
+  script:
+    - /composer/vendor/bin/phpcpd ./src --exclude vendor --exclude tests
+  rules:
+    - if: '$QUALITY_DISABLED == "yes"'
+      when: never
+    - if: '$PHPCPD_ALLOW_FAILURE == "yes"'
+      allow_failure: true
+    - when: on_success
+
+phpstan:
+  stage: code quality
+  image: $PHP_CODE_QUALITY_IMAGE
+  script:
+    - php -d memory_limit=-1 /composer/vendor/bin/phpstan analyse -l $PHPSTAN_LEVEL src tests
+  rules:
+    - if: '$QUALITY_DISABLED == "yes"'
+      when: never
+    - if: '$PHPSTAN_ALLOW_FAILURE == "yes"'
+      allow_failure: true
+    - when: on_success
+
+publish:
+  stage: publish
+  script:
+    - >
+      if [[ "$CI_COMMIT_TAG" =~ .+ ]]; then
+          LIB_VERSION="$CI_COMMIT_TAG";
+      else
+          LIB_VERSION="dev-${CI_COMMIT_REF_SLUG}";
+      fi
+    - 'curl --header "Job-Token: $CI_JOB_TOKEN" --data tag=$LIB_VERSION "https://gitlab.futurefoods.solutions/api/v4/projects/$CI_PROJECT_ID/packages/composer"'

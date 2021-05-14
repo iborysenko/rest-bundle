@@ -20,7 +20,6 @@ class RequestSubscriber implements EventSubscriberInterface
         ];
     }
 
-
     public function onKernelRequest(RequestEvent $event): void
     {
         if (!$event->isMasterRequest()) {

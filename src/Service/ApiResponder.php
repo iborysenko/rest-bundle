@@ -20,8 +20,11 @@ class ApiResponder
 
     private AutoMapperInterface $mapper;
 
-    public function __construct(SerializerInterface $serializer, PaginatorInterface $paginator, AutoMapperInterface $mapper)
-    {
+    public function __construct(
+        SerializerInterface $serializer,
+        PaginatorInterface $paginator,
+        AutoMapperInterface $mapper
+    ) {
         $this->serializer = $serializer;
         $this->paginator = $paginator;
         $this->mapper = $mapper;
@@ -29,15 +32,8 @@ class ApiResponder
 
     public function createResponse($data, ?string $dtoName = null, $statusCode = Response::HTTP_OK): JsonResponse
     {
-        if (null !== $data) {
-            if (null !== $dtoName) {
-                $data = $this->mapper->map($data, $dtoName);
-            }
-        }
-
-        $context[DateTimeNormalizer::FORMAT_KEY] = 'Y-m-d h:i:s';
-        if (null !== $data) {
-            $data = $this->serializer->serialize($data, 'json');
+        if (null !== $data && null !== $dtoName) {
+            $data = $this->serializer->serialize($this->mapper->map($data, $dtoName), 'json');
         }
 
         return new JsonResponse($data, $statusCode, [], true);
@@ -48,8 +44,11 @@ class ApiResponder
         return new Response('', $statusCode);
     }
 
-    public function createPaginatedResponse(PaginationDto $pagination, $data = null, ?string $dtoName = null): JsonResponse
-    {
+    public function createPaginatedResponse(
+        PaginationDto $pagination,
+        $data = null,
+        ?string $dtoName = null
+    ): JsonResponse {
         $paginationResult = $this->paginator->paginate($data, $pagination->page, $pagination->limit);
         $items = $paginationResult->getItems();
         if (null !== $dtoName) {
@@ -57,7 +56,7 @@ class ApiResponder
         }
         $data = [
             'items' => $items,
-            'page'  => $paginationResult->getCurrentPageNumber(),
+            'page' => $paginationResult->getCurrentPageNumber(),
             'limit' => $paginationResult->getItemNumberPerPage(),
             'total' => $paginationResult->getTotalItemCount()
         ];

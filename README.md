@@ -8,13 +8,13 @@ Add to your package.json
   "repositories": [
     {
       "type": "vcs",
-      "url": "git@gitlab.futurefoods.solutions:backend/library/rest-bundle.git"
+      "url": "git@github.com:iborysenko/rest-bundle.git"
     }
   ]
 }
 ``` 
 ```shell
-composer require futurefoods/rest-bundle
+composer require iborysenko/rest-bundle
 ```
 
 ## Enable Bundle in config/bundles.php
